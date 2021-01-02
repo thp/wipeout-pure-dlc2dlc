@@ -23,15 +23,14 @@
 #include <stdint.h>
 
 /**
- * This is basically 8-round XTEA encryption, but with an
- * additional round of modifying ONLY v1 after the last.
+ * This is simply 8-round XTEA encryption.
  *
  * See also:
  *    https://en.wikipedia.org/wiki/XTEA
  *    https://cryptography.fandom.com/wiki/XTEA
  **/
 static void
-modified_xtea(uint32_t *genkey, const uint32_t *key)
+xtea8(uint32_t *genkey, const uint32_t *key)
 {
     uint32_t v0 = genkey[0];
     uint32_t v1 = genkey[1];
@@ -46,10 +45,6 @@ modified_xtea(uint32_t *genkey, const uint32_t *key)
         sum += k;
         v1 += (((v0 << 4 ^ v0 >> 5) + v0) ^ (key[(sum>>11)&3] + sum));
     }
-
-    /* The next two lines are different from the normal XTEA algorithm */
-    sum += k;
-    v1 += (((v0 << 4 ^ v0 >> 5) + v0) ^ (key[(sum>>11)&3] + sum));
 
     genkey[0] = v0;
     genkey[1] = v1;
@@ -74,7 +69,7 @@ crypt_with_key(uint8_t *buffer, uint32_t buffer_length, const uint32_t *key)
         if (i % 8 == 0) {
             genkey.u32[0] = 0x12345678;
             genkey.u32[1] = i / 8;
-            modified_xtea(genkey.u32, key);
+            xtea8(genkey.u32, key);
         }
         buffer[i] ^= genkey.u8[i % 8];
     }
