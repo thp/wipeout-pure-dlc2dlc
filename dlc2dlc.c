@@ -131,7 +131,7 @@ main(int argc, char *argv[])
            "            |_|  | _ \\_  _ _ _ ___\n"
            " DLC             |  _/ || | '_/ -_)\n"
            " Region          |_|  \\_,_|_| \\___|\n"
-           " Converter    2021-01-02 <m@thp.io>\n"
+           " Converter    2021-05-29 <m@thp.io>\n"
            "\n");
 
     FILE *kfp = fopen("keys.txt", "r");
