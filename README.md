@@ -6,7 +6,7 @@
             |_|  | _ \_  _ _ _ ___
  DLC             |  _/ || | '_/ -_)
  Region          |_|  \_,_|_| \___|
- Converter    2021-05-29 <m@thp.io>
+ Converter    2021-05-30 <m@thp.io>
 
 Usage: ./dlc2dlc [PI.WAD] [DONOR.WAD] [OUT.WAD]
 
